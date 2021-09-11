@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "BombayStockTraders",
+    "slug": "snack-27fc43da-8c21-4d72-8689-b20e31a09ca8",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/BSTDone.png",
+    "splash": {
+      "image": "./assets/BST_splash2.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.market.box"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/BSTDone.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.market.box"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "description": ""
+  }
+}

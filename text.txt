@@ -1,0 +1,401 @@
+// import React from 'react'
+// import { StyleSheet, Text, SectionList, View, ScrollView, RefreshControl, FlatList, SafeAreaView, Alert } from 'react-native'
+// import { useportfolioContext } from "./context/Portfolio"
+// import Constants from 'expo-constants';
+import io from 'socket.io-client'
+// import ItemSeparatorView from './FlatlistComponents/ItemSeparatorView';
+// import { ListItem } from 'react-native-elements'
+// import axios from "axios"
+
+// const wait = timeout => {
+//      return new Promise(resolve => {
+//           setTimeout(resolve, timeout);
+//      });
+// };
+
+// const Portfolio = () => {
+//      const [filteredDataSource, setFilteredDataSource] = React.useState(new Set());
+//      const [sets, setS] = React.useState({})
+//      const [margin, setMargin] = React.useState(0)
+//      const [m2mm, setM2m] = React.useState(0)
+//      const [item1, setItem1] = React.useState(0)
+//      const [item2, setItem2] = React.useState(0)
+//      const [activePL, setActivePL] = React.useState([])
+//      const { cred, handleRefresh, socketid, buy_price } = useportfolioContext()
+//      const [refreshing, setRefreshing] = React.useState(false);
+
+//      const onRefresh = React.useCallback(() => {
+//           setRefreshing(true);
+//           wait(1000).then(() => {
+//                handleRefresh(true)
+//                setRefreshing(false)
+//           });
+//      }, []);
+
+//      React.useEffect(() => {
+//           let socket = io('https://bst.saraswatibullion.com');
+//           if (socketid.length > 0) {
+//                socket.on('connect', () => {
+//                     socket.emit('mcxparams', socketid)
+//                     socket.on('mcxData', (data) => {
+//                          //     {
+//                          //           "active_pl": 0,
+//                          //           "buy_price": "47700.00",
+//                          //           "commodity_name": "GOLDM",
+//                          //           "id": "m230323",
+//                          //           "lot_size": "1",
+//                          //           "sell_price": 0,
+//                          //           "uniqueid": "b0499a2d-1089-4e0f-90bd-102abd4dfea2",
+//                          //         },
+//                          console.log(socketid)
+//                          cred.Active.map((item) => {
+//                          data.map((sdata) => {
+//                                    if (item.id === sdata.i) {
+//                                         const data = {
+//                                              id: item.id,
+//                                              commodity_name: item.commodity_name,
+//                                              buy_price: item.buy_price,
+//                                              lot_size: item.lot_size,
+//                                              sell_price: 0,
+//                                              uniqueid: item.uniqueid,
+//                                              dynamic: sdata.b
+//                                         }
+//                                         const arr = [...filteredDataSource, data]
+//                                         // setFilteredDataSource(prev => new Set(prev.add(data)))
+//                                         setFilteredDataSource(arr);
+//                                         setFilteredDataSource(prevState => [...prevState, data]);
+//                                    }
+//                               })
+//                          })
+//                     })
+//                });
+//           }
+
+//           return (() => socket.off())
+//      }, [socketid , cred.Active.length]);
+
+//      console.log(filteredDataSource)
+
+//      const ItemViewActive = ({ item }) => {
+//           return (
+//                <ListItem bottomDivider onPress={() => handleSell(item)}>
+//                     <ListItem.Content>
+//                          <ListItem.Title>Commodity Name : {item.commodity_name}     {item.status}</ListItem.Title>
+//                          <ListItem.Subtitle>Buy Price : {item.buy_price}</ListItem.Subtitle>
+//                          <ListItem.Subtitle>Lot Size : {item.lot_size}</ListItem.Subtitle>
+//                          <ListItem.Title>BUY Price :  <ListItem.Subtitle>{item.dynamic}</ListItem.Subtitle></ListItem.Title>
+//                     </ListItem.Content>
+//                </ListItem>
+
+//           );
+//      };
+
+//      const handleMargin = React.useRef((item, index) => {
+//           setTimeout(() => {
+//                if (item.i === "m230323") {
+//                     setItem1(item.a)
+//                } else if (item.i === "m228243") {
+//                     setItem2(item.a)
+//                }
+//                setMargin(item.a)
+//           }, 0);
+//      }).current;
+
+//      const handlemargin = React.useMemo(() => {
+//           return (
+//                // <View><Text>{(math.sum(item1, item2) - buy_price) ? ((cred.balance - 10000) + math.sum(item1, item2) - buy_price) : 0}</Text></View>
+//                <View><Text>{activePL ? { margin } : 0}</Text></View>
+//           )
+//      })
+
+
+
+//      const ItemView = ({ item, activePL }) => {
+//           return (
+//                <ListItem bottomDivider key={item.i} onPress={() => handleSell(item)}>
+//                     <ListItem.Content>
+//                          <ListItem.Title>{item.n}          {item.ch}     {item.a - 10000}           B:{item.b}</ListItem.Title>
+//                          <ListItem.Subtitle>{item.e}</ListItem.Subtitle>
+//                          <View>
+//                               <ListItem.Subtitle ><Text>Margin:10000</Text></ListItem.Subtitle>
+//                               <ListItem.Subtitle ><Text>CMP:{item.a}</Text></ListItem.Subtitle>
+//                          </View>
+//                     </ListItem.Content>
+//                </ListItem>
+
+//           );
+//      };
+
+//      const handleSellStock = (item) => {
+//           // const data = cred.Active.find((data) => {
+//           //      return data.id === item.i
+//           // })
+//           // if (data) {
+//           console.log(item)
+//           const bodyobject = {
+//                "id": item.id,
+//                "lot_size": item.lot_size,
+//                "buy_price": item.buy_price,
+//                "commodity_name": item.commodity_name,
+//                "active_pl": 0,
+//                "sell_price": 0,
+//                "uniqueid": item.uniqueid
+//           }
+//           axios('https://bst-mcx1.herokuapp.com/close', {
+//                method: 'POST',
+//                data: bodyobject,
+//                headers: {
+//                     "Authorization": `Bearer ${cred.token}`,
+//                     'Accept': 'application/json',
+//                     'Content-Type': 'application/json'
+//                }
+//           }).then(response => {
+//                if (response.status === 200) {
+//                     handleRefresh()
+//                } else {
+
+//                }
+//           })
+//                .catch((err) => {
+//                     console.log(err)
+//                })
+//           // }
+//      }
+//      const handleSell = (item) =>
+//           Alert.alert(
+//                "Sell the Commodity",
+//                `${item.commodity_name}`,
+//                [
+//                     {
+//                          text: "Cancel",
+//                          onPress: () => console.log("Cancel Pressed"),
+//                          style: "cancel"
+//                     },
+//                     { text: "OK", onPress: () => handleSellStock(item) }
+//                ]
+//           );
+
+//      const keyExtractor = (item, index) => index.toString()
+
+//      const renderItem = ({ item }) => (
+//           <ListItem bottomDivider onPress={() => handleSell(item)} >
+//                <ListItem.Content>
+//                     <ListItem.Title>{item.n}</ListItem.Title>
+//                     <ListItem.Title>{item.e}</ListItem.Title>
+//                     <ListItem.Title>Lot : 0</ListItem.Title>
+//                </ListItem.Content>
+//                <ListItem.Content>
+//                     <ListItem.Title>BUY Price :  <ListItem.Subtitle>{item.a}</ListItem.Subtitle></ListItem.Title>
+//                     <ListItem.Title>Active P/L :  <ListItem.Subtitle>{item.b}</ListItem.Subtitle></ListItem.Title>
+//                     <ListItem.Title>CMP :  <ListItem.Subtitle>{item.b}</ListItem.Subtitle></ListItem.Title>
+//                </ListItem.Content>
+//           </ListItem>
+//      )
+
+//      return (
+//           <View>
+//                <SafeAreaView>
+//                     <ScrollView
+//                          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+//                          <View style={styles.buttonContainer2}>
+//                               <View style={styles.container}>
+//                                    <Text>Ledger Balance:</Text>
+//                               </View>
+//                               <View style={styles.container}>
+//                                    <Text>Margin:</Text>
+//                               </View>
+//                               <View style={styles.container}>
+//                                    <Text>{cred.balance}</Text>
+//                               </View>
+//                               <View style={styles.container}>
+//                                    {activePL ? <Text>{margin}</Text> : <Text>0</Text>}
+//                               </View>
+//                               <View style={styles.container}>
+//                                    <Text>Active P/L:</Text>
+//                               </View>
+//                               <View style={styles.container}>
+//                                    <Text>M2M:</Text>
+//                               </View>
+//                               <View style={styles.container}>
+//                                    {/* <Text>{math.sum(item1, item2) - buy_price}</Text> */}
+//                                    <Text>0</Text>
+//                               </View>
+//                               <View style={styles.container}>
+//                                    {/* <Text>{math.sum(item1, item2) - buy_price}</Text> */}
+//                                    <Text>0</Text>
+//                               </View>
+//                          </View>
+//                     </ScrollView>
+//                </SafeAreaView>
+//                {/* <SafeAreaView>
+//                     <FlatList
+//                          data={filteredDataSource}
+//                          ItemSeparatorComponent={ItemSeparatorView}
+//                          renderItem={renderItem}
+//                          keyExtractor={(item, index) => index.toString()}
+//                     />
+//                </SafeAreaView> */}
+//                {cred.Active.length ?
+//                     <View >
+//                          <SectionList
+//                               sections={[
+//                                    { data: filteredDataSource },
+//                               ]}
+//                               renderItem={(items) => ItemViewActive(items)}
+//                               keyExtractor={(item, index) => index}
+//                          />
+//                     </View> :
+//                     <View>
+//                          <Text style={{ textAlign: "center" }}>No Trades Found!</Text>
+//                     </View>
+//                }
+//           </View>
+
+//      )
+// }
+
+// export default Portfolio
+
+// const styles = StyleSheet.create({
+//      buttonContainer2: {
+//           marginTop: 100,
+//           flex: 0,
+//           padding: .2,
+//           marginTop: 50,
+//           marginBottom: 50,
+//           flexDirection: "row",
+//           flexWrap: "wrap",
+//           height: 160,
+//           justifyContent: "center",
+//           alignItems: 'center',
+//           marginLeft: 14,
+//           marginRight: 14,
+//           backgroundColor: "#fff",
+//      },
+//      sectionHeader: {
+//           paddingTop: 2,
+//           paddingLeft: 10,
+//           paddingRight: 10,
+//           paddingBottom: 2,
+//           fontSize: 14,
+//           fontWeight: 'bold',
+//           backgroundColor: 'rgba(247,247,247,1.0)',
+//      },
+//      item: {
+//           padding: 10,
+//           fontSize: 18,
+//           height: 44,
+//      },
+//      scrollView: {
+//           flex: 1,
+//           backgroundColor: 'pink',
+//           alignItems: 'center',
+//           justifyContent: 'center',
+//           width: "100%"
+//      },
+//      container: {
+//           paddingHorizontal: 8,
+//           paddingVertical: 6,
+//           marginHorizontal: "1%",
+//           marginBottom: 6,
+//           minWidth: "42%",
+//           alignItems: "center"
+//      },
+//      container2: {
+//           flex: 1,
+//           marginTop: Constants.statusBarHeight,
+//      },
+// })
+
+
+import React, { Component } from 'react'
+import { Text, View } from 'react-native'
+import { StyleSheet, Text, SectionList, View, ScrollView, RefreshControl, FlatList, SafeAreaView, Alert } from 'react-native'
+
+
+const stocksUrl = 'https://bst.saraswatibullion.com';
+
+
+export class Portfolio extends Component {
+
+     state = {
+          // stocks = {name: {current_value: 12, history: [{time: '2131', value: 45}, ...], is_selected: false}, ...}
+          stocks: [],
+          market_trend: undefined, // 'up' or 'down'
+          connectionError: false
+     }
+
+     componentDidMount = () => {
+          let socket = io('https://bst.saraswatibullion.com');
+          socket.on(('connect') , () => {
+               socket.emit('mcxparams' , ['m224120', "m228243"] )
+               socket.on('mcxData' , (data) => {
+                    this.saveNewStockValues(data)
+               })
+          })
+          // this.connection = socket;
+          // this.connection.onmessage = this.saveNewStockValues;
+          // this.connection.onclose = () => { this.setState({ connectionError: true }) }
+     }
+
+     saveNewStockValues = (event) => {
+          const data = Object.values(event).map((item) => {
+               let mydata = {
+                    id : item.i,
+                    date : item.n,
+                    name : item.e,
+                    value : item.a
+               }
+               return mydata
+          })
+          // this.setState([...this.state.stocks , data])
+          this.setState(prevState => ({
+               stocks: data
+             }))
+          // console.log(event.data)
+          // let result = JSON.parse(event.data);
+          // let [up_values_count, down_values_count] = [0, 0];
+      
+          // // time stored in histories should be consisitent across stocks(better for graphs)
+          // let current_time = Date.now();
+          // let new_stocks = this.state.stocks
+          // result.map((stock) =>
+          // {
+          //   // stock = ['name', 'value']
+          //   if(this.state.stocks[stock[0]])
+          //   {
+          //     new_stocks[stock[0]].current_value > Number(stock[1]) ? up_values_count++ : down_values_count++;
+      
+          //     new_stocks[stock[0]].current_value = Number(stock[1])
+          //     new_stocks[stock[0]].history.push({time: current_time, value: Number(stock[1])})
+          //   }
+          //   else
+          //   {
+          //     new_stocks[stock[0]] = { current_value: stock[1], history: [{time: Date.now(), value: Number(stock[1])}], is_selected: false }
+          //   }
+          // });
+          // this.setState({stocks: new_stocks, market_trend: this.newMarketTrend(up_values_count, down_values_count)})
+        }
+
+
+     render() {
+        console.log(this.state.stocks)
+
+          return (
+               <View>
+                    <Text> textInComponent </Text>
+               </View>
+          )
+     }
+}
+
+export default Portfolio
+
+
+
+
+
+
+
+
+
