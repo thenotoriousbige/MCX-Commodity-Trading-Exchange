@@ -1,7 +1,7 @@
 # MCX-COMMODITY-TRADING-EXCHANGE
 
 
-**MCX is a Virtual Trading Platform built for beginners to learn how to trade without Investing Real Money**
+**MCX is a Real Time Virtual Trading Platform built for beginners to learn how to trade without Investing Real Money**
 
 
 ***You can Install latest App from below***
@@ -11,7 +11,7 @@
 ![MCX Working](./BST.gif)
 
 ## About
-MCX is a commodity trading application where users can learn  How to trade on Commodities with realtime data updated every 500ms.
+MCX is a Real time commodity trading application where users can learn  How to trade on Commodities with realtime data updated every 500ms.
 
 - Clean and Simple  UI.
 - Auto square off position feature added to avoid maximum loss of a trader.
