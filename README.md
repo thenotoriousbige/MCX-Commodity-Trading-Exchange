@@ -31,7 +31,11 @@ A React Native framework for making cross platform applications.
   - [SOCKET.IO](https://socket.io/) - Socket.IO enables real-time, bidirectional and event-based communication.
 It works on every platform, browser or device, focusing equally on reliability and speed..
   - [Lodash](https://lodash.com/) - A modern JavaScript utility library delivering modularity, performance & extras. Used in this Application for performing complex calculations
-
+- [Backend](https://developer.android.com/training/dependency-injection)  
+  - [NODEJS](https://nodejs.org/en/) - Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+It works on every platform, browser or device, focusing equally on reliability and speed..
+  - [EXPRESS](https://expressjs.com/) - Fast, unopinionated, minimalist web framework for Node.js
+  - [Mongodb](https://www.mongodb.com/) -MongoDB for Database
 ``````
 MIT License
 
