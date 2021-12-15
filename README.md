@@ -6,7 +6,7 @@
 
 ***You can Install latest App from below***
 
-[![MCX App](https://img.shields.io/badge/❝MCX❞-APK-blue.svg?style=for-the-badge&logo=android&color=blue)](https://expo.dev/artifacts/ed06db13-c253-422f-9882-d6feca19d2e6)
+[![MCX App](https://img.shields.io/badge/❝MCX❞-APK-blue.svg?style=for-the-badge&logo=android&color=blue)](https://expo.dev/artifacts/64cc235b-7272-40a9-8419-716d74b4fe0e)
  
 ![MCX Working](./BST.gif)
 
