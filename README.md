@@ -8,7 +8,7 @@
 
 [![MCX App](https://img.shields.io/badge/❝MCX❞-APK-blue.svg?style=for-the-badge&logo=android&color=blue)](https://expo.dev/artifacts/b304becc-5ee0-439d-9e85-6e03c0544726)
  
-<img src="./BST.gif" width="200">
+<img src="./BST.gif" width="300" height="400">
 
 ## About
 MCX is a Real time commodity trading application where users can learn  How to trade on Commodities with realtime data updated every 500ms.
